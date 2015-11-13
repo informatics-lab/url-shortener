@@ -1,0 +1,22 @@
+{
+  "name": "url-shortener",
+  "version": "0.1.0",
+  "description": "A node url shortener",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/met-office-lab/url-shortener.git"
+  },
+  "author": "Jacob Tomlinson <jacob@jacobtomlinson.co.uk> (http://www.informaticslab.co.uk/)",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/met-office-lab/url-shortener/issues"
+  },
+  "homepage": "https://github.com/met-office-lab/url-shortener",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.5",
+    "randomstring": "^1.1.3"
+  }
+}
