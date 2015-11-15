@@ -8,7 +8,8 @@ router.get('/', function (req, res) {
 });
 
 router.get('/unknown/:short', function (req, res) {
-  message = "Unknown short code " + req.params.short
+  message = "Error: Unknown short code '" + req.params.short + "'"
+  res.status(404)
   res.send(message)
   console.log(message)
 });
@@ -19,7 +20,7 @@ router.get('/:short', function (req, res) {
       console.log("code " + req.params.short + " -> " + url)
       res.redirect(301, url.url)
     } else {
-      res.send("unknown")
+      res.redirect(301, "/unknown/" + req.params.short)
     }
   })
 
