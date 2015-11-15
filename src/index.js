@@ -10,12 +10,12 @@ var settings = require('./settings/settings')
 
 // Configure express application
 app.set('view engine', 'ejs')
-app.set('views', process.cwd() + '/src/views')
+app.set('views', __dirname + '/src/views')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Configure routing
-app.use('/web', express.static('/src/web'))
+app.use('/web', express.static(__dirname + '/src/static/web'))
 app.use('/api', api)
 app.use('/', get)
 
