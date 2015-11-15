@@ -4,7 +4,7 @@ var router = express.Router()
 var db = require('../models/database.js')
 
 router.get('/', function (req, res) {
-  res.redirect(301, "/web")
+  res.redirect(301, "/web/index.html")
 });
 
 router.get('/unknown/:short', function (req, res) {
