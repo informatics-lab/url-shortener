@@ -1,16 +1,16 @@
 var express = require('express')
 var router = express.Router()
 
-var db = require('./database.js')
+var db = require('../models/database.js')
 
 router.get('/', function (req, res) {
-  res.send("Hello")
+  res.redirect(301, "/web")
 });
 
 router.get('/unknown/:short', function (req, res) {
   message = "Error: Unknown short code '" + req.params.short + "'"
   res.status(404)
-  res.send(message)
+  res.render('pages/404', {"message" : message})
   console.log(message)
 });
 

@@ -1,8 +1,8 @@
 var express = require('express')
 var router = express.Router()
 
-var db = require('./database.js')
-var settings = require('./settings')
+var db = require('../models/database')
+var settings = require('../settings/settings')
 db.connect()
 
 router.get('/', function (req, res) {

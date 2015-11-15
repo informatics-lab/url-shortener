@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var randomstring = require("randomstring")
 
-var settings = require('./settings')
+var settings = require('../settings/settings')
 
 var urlSchema = mongoose.Schema({
     url: String,
