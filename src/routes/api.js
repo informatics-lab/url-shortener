@@ -14,6 +14,7 @@ var build_response = function(status, message, result){
 }
 
 var respond = function(res, data){
+  console.log(data)
   res.setHeader('Content-Type', 'application/json')
   res.status(data.status)
   res.send(JSON.stringify(data))
@@ -37,18 +38,32 @@ router.get('/check/:short', function (req, res) {
 });
 
 router.post('/create', function (req, res) {
+  console.log(req.body.url)
   if (req.body.url === undefined){
+    console.log("Missing url")
     var data = build_response(400, "Missing url", null)
+    respond(res, data)
   } else {
+    console.log("Creating url")
     db.create(req.body.url, req.body.short, function(err, creation){
+      console.log("DB request made")
       if (creation) {
+        console.log("Success")
         var data = build_response(201, "Success!", {"url" : creation.url, "short" : creation.short})
       } else {
-        var data = build_response(400, "Failed to create", null)
+        console.log("Failed to create")
+        var data = build_response(400, "Failed to create: " + err, null)
+        console.log(data)
       }
       respond(res, data)
     })
   }
+});
+
+router.get('/genshort', function (req, res) {
+  var short = db.generate_short()
+  var data = build_response(200, "Generated", short)
+  respond(res, data)
 });
 
 module.exports = router
