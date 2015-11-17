@@ -1,8 +1,11 @@
+// Load dependencies
 var express = require('express')
 var router = express.Router()
 
+// Load project scripts
 var db = require('../models/database.js')
 
+// Start routing
 router.get('/', function (req, res) {
   res.redirect(301, "/web/index.html")
 });
@@ -23,7 +26,7 @@ router.get('/:short', function (req, res) {
       res.redirect(301, "/unknown/" + req.params.short)
     }
   })
-
 });
 
+// Export router object for use in express
 module.exports = router

@@ -1,14 +1,18 @@
+// Load dependencies
 var mongoose = require('mongoose');
 var randomstring = require("randomstring")
 
+// Load project scripts
 var settings = require('../settings/settings')
 
+// Create schemas and models for mongo
 var urlSchema = mongoose.Schema({
     url: String,
     short: String
 });
 var urlModel = mongoose.model('url', urlSchema)
 
+// Export db object to abstract CRUD operations
 module.exports = {
   db: null,
 

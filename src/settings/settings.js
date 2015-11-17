@@ -1,3 +1,4 @@
+// Default settings which can be overidden with environment variables
 module.exports = {
   port: process.env.PORT || 3000,
   dbhost: process.env.DB_HOST || "localhost",

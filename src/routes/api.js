@@ -1,10 +1,15 @@
+// Load dependencies
 var express = require('express')
 var router = express.Router()
 
+// Load project scripts
 var db = require('../models/database')
 var settings = require('../settings/settings')
+
+// Connect to database
 db.connect()
 
+// Utility functions
 var build_response = function(status, message, result){
   return {
     "status" : status,
@@ -20,10 +25,11 @@ var respond = function(res, data){
   res.send(JSON.stringify(data))
 }
 
+// Start routing
 router.get('/', function (req, res) {
   var data = build_response(200, "Welcome to the API", null)
   respond(res, data)
-});
+})
 
 router.get('/check/:short', function (req, res) {
   db.check_short(req.params.short, function(err, url){
@@ -35,7 +41,7 @@ router.get('/check/:short', function (req, res) {
     }
     respond(res, data)
   })
-});
+})
 
 router.post('/create', function (req, res) {
   console.log(req.body.url)
@@ -58,12 +64,13 @@ router.post('/create', function (req, res) {
       respond(res, data)
     })
   }
-});
+})
 
 router.get('/genshort', function (req, res) {
   var short = db.generate_short()
   var data = build_response(200, "Generated", short)
   respond(res, data)
-});
+})
 
+// Export router object for use in express
 module.exports = router
