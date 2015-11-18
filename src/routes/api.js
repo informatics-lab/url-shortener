@@ -67,7 +67,7 @@ router.post('/create', function (req, res) {
 
 router.get('/genshort', function (req, res) {
   var short = db.generate_short()
-  var data = build_response(200, "Generated", {"short": short})
+  var data = build_response(200, "Generated", {"short": short, "baseurl": settings.getBaseURL()})
   respond(res, data)
 })
 

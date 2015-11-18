@@ -35,11 +35,11 @@ Request:
 | Parameter | Description |
 | --------- | ----------- |
 | `url`     | url to be shortened |
-| `short`   | (optional) extention to use |
+| `short`   | _(optional)_ short code to use |
 
-Response `result`:
+Response `result` object:
 
-| Parameter | Description |
+| Property | Description |
 | --------- | ----------- |
 | `url`     | the url which has been shortened |
 | `short`   | the short code used |
@@ -56,9 +56,9 @@ $ curl -d url=http://www.informaticslab.co.uk/ http://domain.tld/api/create
 
 Returns whether a short code exists. Will return 404 if it doesn't exist.
 
-Response `result`:
+Response `result` object:
 
-| Parameter | Description |
+| Property | Description |
 | --------- | ----------- |
 | `url`     | the url which has been shortened |
 | `short`   | the short code used |
@@ -78,17 +78,18 @@ $ curl http://domain.tld/api/check/h8Jk0sl
 
 Returns a random string to use as a short.
 
-Response `result`:
+Response `result` object:
 
-| Parameter | Description |
+| Property | Description |
 | --------- | ----------- |
 | `short`   | the generated short code |
+| `baseurl`   | the base url of the server |
 
 #### Example
 
 ```
 $ curl http://domain.tld/api/genshort
-{"status":200,"message":"Generated","result":{"short":"GLXAWtD"}}
+{"status":200,"message":"Generated","result":{"short":"h1ZCaYw","baseurl":"http://domain.tld"}}
 ```
 
 ## Contributing

@@ -79,7 +79,7 @@
         </div>
         <label for="">Short</label>
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon3">https://inlb.co/</span>
+          <span class="input-group-addon" id="basic-addon3">{{ baseurl }}</span>
           <input type="text" ng-model="short" class="form-control" id="short" aria-describedby="basic-addon3">
           <span class="input-group-addon" ng-click="genshort()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></span>
         </div>
@@ -105,6 +105,7 @@
         $scope.genshort = function(){
           $http.get("/api/genshort").then(
             function success(data) {
+              $scope.baseurl = data.data.result.baseurl;
               $scope.short = data.data.result.short;
             },
             function failure(err) {
@@ -131,7 +132,7 @@
           $http.post("/api/create", data, options).then(
             function success(data) {
               $scope.resulturl = data.data.result.url;
-              $scope.resultshort = data.data.result.domain + '/' + data.data.result.short;
+              $scope.resultshort = data.data.result.baseurl + '/' + data.data.result.short;
               $scope.url = "";
               $scope.genshort();
             },
