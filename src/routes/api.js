@@ -34,8 +34,7 @@ router.get('/', function (req, res) {
 router.get('/check/:short', function (req, res) {
   db.check_short(req.params.short, function(err, url){
     if (url){
-      url.domain = settings.domain
-      var data = build_response(200, "Short exists", url)
+      var data = build_response(200, "Short exists", {"url": url.url, "short": url.short, "baseurl": settings.getBaseURL()})
     } else {
       var data = build_response(404, "Short not found", null)
     }
@@ -54,8 +53,8 @@ router.post('/create', function (req, res) {
     db.create(req.body.url, req.body.short, function(err, creation){
       console.log("DB request made")
       if (creation) {
-        console.log("Success")
-        var data = build_response(201, "Success!", {"url" : creation.url, "short" : creation.short})
+        console.log("Success, short created!")
+        var data = build_response(201, "Success, short created!", {"url" : creation.url, "short" : creation.short, "baseurl": settings.getBaseURL()})
       } else {
         console.log("Failed to create")
         var data = build_response(400, "Failed to create: " + err, null)
@@ -68,7 +67,7 @@ router.post('/create', function (req, res) {
 
 router.get('/genshort', function (req, res) {
   var short = db.generate_short()
-  var data = build_response(200, "Generated", short)
+  var data = build_response(200, "Generated", {"short": short})
   respond(res, data)
 })
 

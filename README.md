@@ -29,19 +29,67 @@ Once a short code has been created just visit http://domain.tld/:short and you w
 
 ## API
 
-### http://domain.tld/api/create
-POST
-Parameters
-`url`: url to be shortened
-`short`: (optional) extention to use
+### `POST` `http://domain.tld/api/create`
+Request:
 
-### `http://domain.tld/api/check/:short`
-GET
-Returns whether a short code exists.
+| Parameter | Description |
+| --------- | ----------- |
+| `url`     | url to be shortened |
+| `short`   | (optional) extention to use |
 
-### `http://domain.tld/api/genshort`
-GET
+Response `result`:
+
+| Parameter | Description |
+| --------- | ----------- |
+| `url`     | the url which has been shortened |
+| `short`   | the short code used |
+| `baseurl`   | the base url of the server |
+
+#### Example
+
+```
+$ curl -d url=http://www.informaticslab.co.uk/ http://domain.tld/api/create
+{"status":201,"message":"Success, short created!","result":{"url":"http://www.informaticslab.co.uk/","short":"nUAm7HC","baseurl":"http://domain.tld"}}
+```
+
+### `GET` `http://domain.tld/api/check/:short`
+
+Returns whether a short code exists. Will return 404 if it doesn't exist.
+
+Response `result`:
+
+| Parameter | Description |
+| --------- | ----------- |
+| `url`     | the url which has been shortened |
+| `short`   | the short code used |
+| `baseurl`   | the base url of the server |
+
+#### Example
+
+```
+$ curl http://domain.tld/api/check/nUAm7HC
+{"status":200,"message":"Short exists","result":{"url":"http://www.informaticslab.co.uk/","short":"nUAm7HC","baseurl":"http://domain.tld"}}
+
+$ curl http://domain.tld/api/check/h8Jk0sl
+{"status":404,"message":"Short not found","result":null}
+```
+
+### `GET` `http://domain.tld/api/genshort`
+
 Returns a random string to use as a short.
+
+Response `result`:
+
+| Parameter | Description |
+| --------- | ----------- |
+| `short`   | the generated short code |
+
+#### Example
+
+```
+$ curl http://domain.tld/api/genshort
+{"status":200,"message":"Generated","result":{"short":"GLXAWtD"}}
+```
 
 ## Contributing
 Pull requests are appreciated
