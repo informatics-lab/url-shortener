@@ -40,15 +40,28 @@ You can also use the API directly or to create other clients for creating short 
 
 ## API
 
+All API responses are `json` and take the form of:
+
+```
+{
+  "status": http_code,
+  "message": human_readable_string,
+  "result": data_object
+}
+```
+
 ### `POST` `http://domain.tld/api/create`
-Request:
+
+Creates a new shortened url.
+
+#### Request
 
 | Parameter | Description |
 | --------- | ----------- |
 | `url`     | url to be shortened. |
 | `short`   | _(optional)_ short code to use. If not set one will be generated for you. |
 
-Response `result` object:
+#### Response `result`
 
 | Property | Description |
 | --------- | ----------- |
@@ -65,9 +78,9 @@ $ curl -d url=http://www.informaticslab.co.uk/ http://domain.tld/api/create
 
 ### `GET` `http://domain.tld/api/check/:short`
 
-Returns whether a short code exists. Will return 404 if it doesn't exist.
+Returns whether a short code exists. Will return `404` if it doesn't exist.
 
-Response `result` object:
+#### Response `result`
 
 | Property | Description |
 | --------- | ----------- |
@@ -89,7 +102,7 @@ $ curl http://domain.tld/api/check/h8Jk0sl
 
 Returns a random string to use as a short.
 
-Response `result` object:
+#### Response `result`
 
 | Property | Description |
 | --------- | ----------- |
@@ -105,7 +118,7 @@ $ curl http://domain.tld/api/genshort
 
 ## Runtime environment variables
 
-To configure your server you must set some environment variables before starting the node application. If you're using docker simply pass the variables in the run command with `-e VAR=value`, otherwise set them with `export VAR=value` within your bash environment.
+To configure your server you can set some environment variables before starting the node application. If you're using docker simply pass the variables in the run command with `-e VAR=value`, otherwise set them with `export VAR=value` within your bash environment.
 
 | Variable | Description | Default |
 | -------- | ----------- | ------- |
