@@ -4,10 +4,11 @@ var router = express.Router()
 
 // Load project scripts
 var db = require('../models/database.js')
+var settings = require('../settings/settings')
 
 // Start routing
 router.get('/', function (req, res) {
-  res.redirect(301, "/web/index.html")
+  res.redirect(301, settings.rootredirect)
 });
 
 router.get('/unknown/:short', function (req, res) {

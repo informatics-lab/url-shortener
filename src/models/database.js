@@ -17,7 +17,7 @@ module.exports = {
   db: null,
 
   connect: function(){
-    mongoose.connect('mongodb://' + settings.dbhost + '/' + settings.dbname)
+    mongoose.connect('mongodb://' + settings.dbhost + ":" + settings.dbport + '/' + settings.dbname)
     this.db = mongoose.connection
     this.db.on('error', console.error.bind(console, 'connection error:'))
     this.db.once('open', function (callback) {
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   generate_short: function(){
-    short = randomstring.generate(7)
+    short = randomstring.generate(settings.shortlength)
     return short
   },
 
